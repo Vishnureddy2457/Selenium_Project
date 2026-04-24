@@ -22,8 +22,7 @@ public class AllConcepts_Covered_Program {
 		.moveToElement(selenium_frame).click().perform();
 		
 		driver.findElement(By.id("name")).sendKeys("hi this is vishnu");
-		
-		
+	
 		driver.switchTo().frame("frm1");
 		Select coursename = new Select(driver.findElement(By.id("course")));
 		coursename.selectByVisibleText("Python");
@@ -34,19 +33,12 @@ public class AllConcepts_Covered_Program {
 		
 		driver.switchTo().frame("frm2");
 		driver.findElement(By.id("firstName")).sendKeys("vishnu");
-		
 		driver.findElement(By.xpath("//input[@id='malerb']")).click();
 		
 		driver.switchTo().parentFrame();
 		
-		
-		
 		driver.findElement(By.id("name")).clear();
 		driver.findElement(By.id("name")).sendKeys("hi task ending");
-		
-		Thread.sleep(5000);
-		
-		
 		driver.quit();
 
 	}
