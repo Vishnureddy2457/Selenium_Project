@@ -1,0 +1,82 @@
+package com.seleniumprjects;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
+
+public class Orange_hrm_login {
+
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    }
+
+    @Test(priority = 1)
+    public void loginTest() {
+
+        // Wait for username
+        WebElement username = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.name("username"))
+        );
+        username.sendKeys("Admin");
+
+        // Password
+        driver.findElement(By.name("password")).sendKeys("admin123");
+
+        // Login
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+        // Wait for Dashboard (VERY IMPORTANT)
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//h6[text()='Dashboard']")
+        ));
+    }
+
+    @Test(priority = 2, dependsOnMethods = "loginTest")
+    public void clickPIM() {
+
+        WebElement pim = wait.until(
+            ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='PIM']"))
+        );
+        pim.click();
+    }
+
+    @Test(priority = 3)
+    public void logout() {
+
+        // Profile click
+        WebElement profile = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//img[@alt='profile picture']")
+            )
+        );
+        profile.click();
+
+        // Logout
+        WebElement logout = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[text()='Logout']")
+            )
+        );
+        logout.click();
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
