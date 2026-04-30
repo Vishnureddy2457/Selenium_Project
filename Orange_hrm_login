@@ -28,19 +28,15 @@ public class Orange_hrm_login {
     @Test(priority = 1)
     public void loginTest() {
 
-        // Wait for username
         WebElement username = wait.until(
             ExpectedConditions.visibilityOfElementLocated(By.name("username"))
         );
         username.sendKeys("Admin");
 
-        // Password
         driver.findElement(By.name("password")).sendKeys("admin123");
 
-        // Login
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
-        // Wait for Dashboard (VERY IMPORTANT)
         wait.until(ExpectedConditions.visibilityOfElementLocated(
             By.xpath("//h6[text()='Dashboard']")
         ));
@@ -58,7 +54,6 @@ public class Orange_hrm_login {
     @Test(priority = 3)
     public void logout() {
 
-        // Profile click
         WebElement profile = wait.until(
             ExpectedConditions.elementToBeClickable(
                 By.xpath("//img[@alt='profile picture']")
@@ -66,7 +61,6 @@ public class Orange_hrm_login {
         );
         profile.click();
 
-        // Logout
         WebElement logout = wait.until(
             ExpectedConditions.elementToBeClickable(
                 By.xpath("//a[text()='Logout']")
