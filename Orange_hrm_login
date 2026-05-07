@@ -73,6 +73,7 @@ public class Orange_hrm_login {
         logout.click();
     }
 
+    // Exit the browser
     @AfterClass
     public void tearDown() {
         driver.quit();
