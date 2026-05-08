@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 public class AllConcepts_Covered_Program {
 
 	public static void main(String[] args) throws InterruptedException {
-		// TODO Auto-generated method stub
+	
 		WebDriver driver = new ChromeDriver(); 
 		Actions actions = new Actions(driver); 
 		
@@ -39,6 +39,8 @@ public class AllConcepts_Covered_Program {
 		
 		driver.findElement(By.id("name")).clear();
 		driver.findElement(By.id("name")).sendKeys("hi task ending");
+
+		// Exit the browser
 		driver.quit();
 
 	}
